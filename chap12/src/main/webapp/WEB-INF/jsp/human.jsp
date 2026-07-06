@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>${msg} com:${com}</p>
+	<c:forEach var="human" items="${humanList}">
+		名前：<c:out value="${human.name}" />、
+		年齢：<c:out value="${human.age}" /><br>
+	</c:forEach>
 </body>
 </html>

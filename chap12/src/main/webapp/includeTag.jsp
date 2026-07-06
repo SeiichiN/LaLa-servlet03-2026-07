@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>動的インクルード</title>
 </head>
 <body>
-	<p>${msg} com:${com}</p>
+	<jsp:include page="header.jsp" />
+	<p>「どこつぶ」は・・・</p>
+	<jsp:include page="footer.jsp" />
 </body>
 </html>
