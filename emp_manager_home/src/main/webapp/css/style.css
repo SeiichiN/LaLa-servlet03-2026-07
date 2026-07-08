@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+* {
+    box-sizing: border-box;
+}
+
+body, h1, h2, h3, p, ul {
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+header h1,
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+header h1 a, 
+header h1 a:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+header,
+footer {
+    background-color: lightblue;
+    padding: 10px 0;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.error {
+    color: red;
+}
+
+/*
+ * テーブルのデザイン
+ */
+table {
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+table th {
+    background-color: #ddd;
+}
+
+table th, table td {
+    border: solid 1px #aaa;
+    padding: 5px 8px;
+}
+
+.no-border {
+    border: none;
+}
+
+.no-bkcolor {
+    background-color: transparent;
+}
+
