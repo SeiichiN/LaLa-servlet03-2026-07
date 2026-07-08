@@ -12,6 +12,13 @@ public class Validate {
 			errors.add("IDを入力してください");
 		} else if (!pattern.matcher(emp.getId()).matches()) {
 			errors.add("IDの形式が正しくありません");
+		} else {
+		    // ID重複チェック
+			// ExistIdLogic existIdLogic = new ExistIdLogic();
+			// boolean exist = existIdLogic.execute(emp.getId());
+			// if (exist) {
+			// 	errors.add("IDが重複しています");
+			// }
 		}
 		
 		if (emp.getName() == null || emp.getName().isEmpty()) {
