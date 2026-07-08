@@ -17,5 +17,9 @@ public class Validate {
 		if (emp.getName() == null || emp.getName().isEmpty()) {
 			errors.add("名前を入力してください");
 		}
+		
+		if (emp.getAge() <= 0) {
+			errors.add("年齢を数字で入力してください");
+		}
 	}
 }

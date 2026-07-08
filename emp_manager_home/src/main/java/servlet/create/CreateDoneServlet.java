@@ -6,32 +6,29 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Employee;
+import model.RegistEmployeeLogic;
 import servlet.util.SetEmployee;
-import servlet.util.Validate;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-@WebServlet("/CreateConfirmServlet")
-public class CreateConfirmServlet extends HttpServlet {
+@WebServlet("/CreateDoneServlet")
+public class CreateDoneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SetEmployee setEmployee = new SetEmployee();
 		Employee employee = setEmployee.execute(request);
-		List<String> errors = new ArrayList<String>();
-		Validate validate = new Validate();
-		validate.check(employee, errors);
-		
-		request.setAttribute("emp", employee);
-		if (errors.size() == 0) {
-			request.getRequestDispatcher("WEB-INF/jsp/create/createConfirm.jsp").forward(request, response);
+		RegistEmployeeLogic registEmployeeLogic = new RegistEmployeeLogic();
+		boolean result = registEmployeeLogic.execute(employee);
+		String msg = null;
+		if (result == true) {
+			msg = "登録しました";
 		} else {
-			request.setAttribute("errors", errors);
-			request.getRequestDispatcher("WEB-INF/jsp/create/createInput.jsp").forward(request, response);
+			msg = "登録に失敗しました";
 		}
-
+		request.setAttribute("msg", msg);
+		request.getRequestDispatcher("WEB-INF/jsp/create/createDone.jsp").forward(request, response);
+		
 	}
 
 }

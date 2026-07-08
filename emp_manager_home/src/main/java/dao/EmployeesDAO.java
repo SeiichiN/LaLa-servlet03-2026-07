@@ -43,4 +43,24 @@ public class EmployeesDAO {
 		
 		return empList;
 	}
+	
+	public boolean create(Employee emp) {
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			String srl = "INSERT INTO EMPLOYEES(ID, NAME, AGE) VALUES(?, ?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(srl);
+			pStmt.setString(1, emp.getId());
+			pStmt.setString(2, emp.getName());
+			pStmt.setInt(3, emp.getAge());
+			int result = pStmt.executeUpdate();
+			
+			if (result != 1) {
+				return false;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
 }
