@@ -17,13 +17,6 @@ public class EmployeesDAO {
 	
 	public List<Employee> findAll() {
 		List<Employee> empList = new ArrayList<>();
-		try {
-			Class.forName("org.h2.Driver");
-		} catch (ClassNotFoundException e) {
-			throw new IllegalStateException(
-					"JDBCドライバーを読み込めませんでした");
-		}
-		
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			String srl = "SELECT ID, NAME, AGE FROM EMPLOYEES";
 			PreparedStatement pStmt = conn.prepareStatement(srl);
@@ -63,4 +56,21 @@ public class EmployeesDAO {
 		return true;
 	}
 
+	public boolean notExistId(String id) {
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			String srl = "SELECT ID FROM EMPLOYEES WHERE ID = ?";
+			PreparedStatement pStmt = conn.prepareStatement(srl);
+			pStmt.setString(1, id);
+			ResultSet rs = pStmt.executeQuery();
+			
+			if (rs.next()) {
+				return false;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+		
+	}
 }

@@ -22,6 +22,6 @@
 	<input type="hidden" name="name" value="<c:out value="${emp.name}" />">
 	<input type="hidden" name="age" value="<c:out value="${emp.age}" />">
 	<input type="submit" value="登録" class="btn">
-	<input type="submit" value="確認にもどる" class="btn"
-		formaction="CreateConfirmServlet">
+	<input type="submit" value="入力にもどる" class="btn"
+		formaction="CreateServlet">
 </form>

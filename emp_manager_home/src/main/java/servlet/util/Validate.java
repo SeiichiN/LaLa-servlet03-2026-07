@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import model.Employee;
+import model.NotExistIdLogic;
 
 public class Validate {
 	public void check(Employee emp, List<String> errors) {
@@ -14,11 +15,11 @@ public class Validate {
 			errors.add("IDの形式が正しくありません");
 		} else {
 		    // ID重複チェック
-			// ExistIdLogic existIdLogic = new ExistIdLogic();
-			// boolean exist = existIdLogic.execute(emp.getId());
-			// if (exist) {
-			// 	errors.add("IDが重複しています");
-			// }
+			NotExistIdLogic notExistIdLogic = new NotExistIdLogic();
+			boolean notExist = notExistIdLogic.execute(emp.getId());
+			if (notExist == false) {
+			 	errors.add("IDが重複しています");
+			}
 		}
 		
 		if (emp.getName() == null || emp.getName().isEmpty()) {
