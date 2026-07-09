@@ -22,7 +22,7 @@ public class CreateConfirmServlet extends HttpServlet {
 		Employee employee = setEmployee.execute(request);
 		List<String> errors = new ArrayList<String>();
 		Validate validate = new Validate();
-		validate.check(employee, errors);
+		validate.check(employee, errors, "create");
 		
 		request.setAttribute("emp", employee);
 		if (errors.size() == 0) {

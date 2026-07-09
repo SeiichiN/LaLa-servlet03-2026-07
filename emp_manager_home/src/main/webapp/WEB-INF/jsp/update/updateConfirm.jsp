@@ -12,13 +12,8 @@
 	<jsp:include page="../common/header.jsp" />
 	<div class="container">
 		<main>
-			<h2>新規社員情報</h2>
-			<c:if test="${not empty msg}">
-				<p><c:out value="${msg}" /></p>
-			</c:if>
-			<form action="list" method="get">
-				<input type="submit" value="一覧にもどる" class="btn">
-			</form>
+			<h2>社員情報編集・確認</h2>
+			<jsp:include page="updateConfirmTable.jsp" />
 		</main>
 		<jsp:include page="../common/aside.jsp" />
 	</div>		

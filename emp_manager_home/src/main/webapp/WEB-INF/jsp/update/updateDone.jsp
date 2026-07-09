@@ -12,7 +12,7 @@
 	<jsp:include page="../common/header.jsp" />
 	<div class="container">
 		<main>
-			<h2>新規社員情報</h2>
+			<h2>社員情報編集</h2>
 			<c:if test="${not empty msg}">
 				<p><c:out value="${msg}" /></p>
 			</c:if>

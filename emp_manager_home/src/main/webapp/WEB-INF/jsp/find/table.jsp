@@ -15,7 +15,7 @@
 			<td><c:out value="${emp.name}" /></td>
 			<td><c:out value="${emp.age}" /></td>
 			<td class="no-border">
-				<form action="update" method="post">
+				<form action="UpdateServlet" method="post">
 					<input type="hidden" name="id" value="<c:out value="${emp.id}" />">
 					<input type="submit" value="更新" class="btn">
 				</form>

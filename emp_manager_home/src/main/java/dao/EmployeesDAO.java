@@ -71,6 +71,45 @@ public class EmployeesDAO {
 			return false;
 		}
 		return true;
+	}
+	
+	public Employee findById(String id) {
+		Employee employee = null;
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			String srl = "SELECT ID, NAME, AGE FROM EMPLOYEES WHERE ID = ?";
+			PreparedStatement pStmt = conn.prepareStatement(srl);
+			pStmt.setString(1, id);
+			ResultSet rs = pStmt.executeQuery();
+			
+			if (rs.next()) {
+				String name = rs.getString("NAME");
+				int age = rs.getInt("AGE");
+				employee = new Employee(id, name, age);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return employee;
 		
+	}
+	
+	public boolean update(Employee emp) {
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			String srl = "UPDATE EMPLOYEES SET NAME = ?, AGE = ? WHERE ID = ?";
+			PreparedStatement pStmt = conn.prepareStatement(srl);
+			pStmt.setString(1, emp.getName());
+			pStmt.setInt(2, emp.getAge());
+			pStmt.setString(3, emp.getId());
+			int result = pStmt.executeUpdate();
+			
+			if (result != 1) {
+				return false;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 }

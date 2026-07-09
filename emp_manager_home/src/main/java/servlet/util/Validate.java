@@ -7,18 +7,20 @@ import model.Employee;
 import model.NotExistIdLogic;
 
 public class Validate {
-	public void check(Employee emp, List<String> errors) {
+	public void check(Employee emp, List<String> errors, String mode) {
 		Pattern pattern = Pattern.compile("^EMP[0-9]{3}$");
 		if (emp.getId() == null || emp.getId().isEmpty()) {
 			errors.add("IDを入力してください");
 		} else if (!pattern.matcher(emp.getId()).matches()) {
 			errors.add("IDの形式が正しくありません");
 		} else {
-		    // ID重複チェック
-			NotExistIdLogic notExistIdLogic = new NotExistIdLogic();
-			boolean notExist = notExistIdLogic.execute(emp.getId());
-			if (notExist == false) {
-			 	errors.add("IDが重複しています");
+			if (mode.equals("create")) {
+			    // ID重複チェック
+				NotExistIdLogic notExistIdLogic = new NotExistIdLogic();
+				boolean notExist = notExistIdLogic.execute(emp.getId());
+				if (notExist == false) {
+				 	errors.add("IDが重複しています");
+				}
 			}
 		}
 		
