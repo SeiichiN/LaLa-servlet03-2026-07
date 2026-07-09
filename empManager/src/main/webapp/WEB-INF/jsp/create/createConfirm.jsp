@@ -17,12 +17,13 @@
 				<table>
 					<tr>
 						<th>ID</th>
-						<td><c:out value-"${emp.id}" /></td>
+						<td><c:out value="${emp.id}" /></td>
 					</tr>
 					<tr>
 						<th>名前</th>
 						<td><c:out value="${emp.name}" /></td>
 					</tr>
+					<tr>
 						<th>年齢</th>
 						<td><c:out value="${emp.age}" /></td>
 					<tr>

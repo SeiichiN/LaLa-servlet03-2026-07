@@ -21,7 +21,7 @@
 				</form>
 			</td>
 			<td class="no-border">
-				<form action="delete" method="post">
+				<form action="RemoveServlet" method="post">
 					<input type="hidden" name="id" value="<c:out value="${emp.id}" />">
 					<input type="submit" value="削除" class="btn">
 				</form>

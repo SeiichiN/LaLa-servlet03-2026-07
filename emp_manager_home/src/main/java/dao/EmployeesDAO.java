@@ -112,4 +112,22 @@ public class EmployeesDAO {
 		}
 		return true;
 	}
+	
+	public boolean remove(String id) {
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			String srl = "DELETE FROM EMPLOYEES WHERE ID = ?";
+			PreparedStatement pStmt = conn.prepareStatement(srl);
+			pStmt.setString(1, id);
+			int result = pStmt.executeUpdate();
+			
+			if (result != 1) {
+				return false;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+		
+	}
 }
