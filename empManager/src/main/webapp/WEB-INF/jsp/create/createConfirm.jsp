@@ -14,24 +14,27 @@
 	<div class="container">
 		<main>
 			<h2>新規社員登録・確認</h2>
-				<table>
-					<tr>
-						<th>ID</th>
-						<td><c:out value="${emp.id}" /></td>
-					</tr>
-					<tr>
-						<th>名前</th>
-						<td><c:out value="${emp.name}" /></td>
-					</tr>
-					<tr>
-						<th>年齢</th>
-						<td><c:out value="${emp.age}" /></td>
-					<tr>
-				</table>
+			<table>
+				<tr>
+					<th>ID</th>
+					<td><c:out value="${emp.id}" /></td>
+				</tr>
+				<tr>
+					<th>名前</th>
+					<td><c:out value="${emp.name}" /></td>
+				</tr>
+				<tr>
+					<th>年齢</th>
+					<td><c:out value="${emp.age}" /></td>
+				</tr>
+			</table>
 			<form action="CreateDoneServlet" method="post">
+				<input type="hidden" name="id" value="<c:out value="${emp.id}" />">
+				<input type="hidden" name="name" value="<c:out value="${emp.name}" />">
+				<input type="hidden" name="age" value="<c:out value="${emp.age}" />">
 				<input type="submit" value="登録" class="btn">
 				<input type="submit" value="入力に戻る" class="btn"
-				       formaction=""> 
+				       formaction="CreateServlet" formmethod="post"> 
 			</form>
 		</main>
 		<jsp:include page="../common/aside.jsp" />

@@ -1,0 +1,32 @@
+誕生日から年齢を自動計算する
+
+準備
+プロジェクトcalcAge
+
+Personビーンズ(model)
+  name      :String
+  birthDate :LocalDate
+
+
+
+処理の流れ
+
+(1) PersonServletサーブレット doGet()
+    person.jspにフォワード
+
+(2) person.jsp を表示
+    名前と誕生日(yyyy/MM/dd)を入力
+
+(3) PersonServletサーブレット doPost()
+    (3-a) 名前(文字列)と誕生日(文字列)を受け取る
+    (3-b) ParseDateLogicのインスタンスを作成
+    (3-c) ParseDateLogicインスタンスのexecute()メソッドに
+          誕生日(文字列)をわたす -> 戻り値は日付オブジェクト(LocalDate)
+    (3-d) 名前(文字列)と誕生日(LocalDate)からPersonビーンズを生成
+    (3-e) Personビーンズをリクエストスコープに保存
+    (3-f) person.jspにフォワード
+
+(4) person.jspを表示
+    名前と年齢を表示する。
+
+;; 修正時刻: Sun 2026/07/05 19:50:00

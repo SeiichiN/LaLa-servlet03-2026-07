@@ -1,6 +1,7 @@
-package servlet.create;
+package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,24 +9,30 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import model.Employee;
-import servlet.util.SetEmployee;
+import model.ParseDateLogic;
+import model.Person;
 
-@WebServlet("/CreateServlet")
-public class CreateServlet extends HttpServlet {
+@WebServlet("/PersonServlet")
+public class PersonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "WEB-INF/jsp/create/createEmp.jsp";
+		String url = "WEB-INF/jsp/person.jsp";
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SetEmployee setEmp = new SetEmployee();
-		Employee emp = setEmp.set(request);
-		request.setAttribute("emp", emp);
-		String url = "WEB-INF/jsp/create/createEmp.jsp";
+		request.setCharacterEncoding("UTF-8");
+		String name = request.getParameter("name");
+		String birthday = request.getParameter("birthday");
+		
+		ParseDateLogic logic = new ParseDateLogic();
+		LocalDate birthDate = logic.execute(birthday);
+		Person p = new Person(name, birthDate);
+		request.setAttribute("person", p);
+		String url = "WEB-INF/jsp/person.jsp";
 		request.getRequestDispatcher(url).forward(request, response);
 	}
+	
 
 }
