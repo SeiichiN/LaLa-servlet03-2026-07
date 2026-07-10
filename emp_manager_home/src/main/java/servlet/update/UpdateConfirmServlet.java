@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import model.Employee;
 import servlet.util.SetEmployee;
 import servlet.util.Validate;
@@ -22,7 +23,7 @@ public class UpdateConfirmServlet extends HttpServlet {
 		Employee emp = employee.execute(request);
 		List<String> errors = new ArrayList<String>();
 		Validate validate = new Validate();
-		validate.check(emp, errors, "update");
+		validate.check(emp, errors);
 		request.setAttribute("emp", emp);
 		String url = null;
 		if (errors.size() > 0) {
