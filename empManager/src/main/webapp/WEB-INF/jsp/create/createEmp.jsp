@@ -14,18 +14,28 @@
 	<div class="container">
 		<main>
 			<h2>新規社員登録</h2>
+			
+			<c:if test="${not empty errors}">
+				<c:forEach var="error" items="${errors}">
+					<p class="error">${error}</p>
+				</c:forEach>
+			</c:if>
+			
 			<form action="CreateConfirmServlet" method="post">
 				<table>
 					<tr>
 						<th>ID</th>
-						<td><input type="text" name="id"></td>
+						<td><input type="text" name="id"
+						    value="<c:out value="${emp.id}" />"></td>
 					</tr>
 					<tr>
 						<th>名前</th>
-						<td><input type="text" name="name"></td>
+						<td><input type="text" name="name"
+						    value="<c:out value="${emp.name}" />"></td>
 					</tr>
 						<th>年齢</th>
-						<td><input type="text" name="age"></td>
+						<td><input type="text" name="age"
+						    value="<c:out value="${emp.age}" />"></td>
 					<tr>
 				</table>
 				<input type="submit" value="確認" class="btn">

@@ -58,6 +58,10 @@ footer {
 	cursor: pointer;
 }
 
+.error {
+	color: red;
+}
+
 /*
  * テーブルのデザイン
  */

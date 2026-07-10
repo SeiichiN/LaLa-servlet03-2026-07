@@ -17,13 +17,6 @@ public class EmployeesDAO {
 	
 	public List<Employee> findAll() {
 		List<Employee> empList = new ArrayList<>();
-		try {
-			Class.forName("org.h2.Driver");
-		} catch (ClassNotFoundException e) {
-			throw new IllegalStateException(
-					"JDBCドライバーを読み込めませんでした");
-		}
-		
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			String srl = "SELECT ID, NAME, AGE FROM EMPLOYEES";
 			PreparedStatement pStmt = conn.prepareStatement(srl);
@@ -40,7 +33,45 @@ public class EmployeesDAO {
 			e.printStackTrace();
 			return null;
 		}
-		
 		return empList;
+	}  // findAll() end
+	
+	// idが使われていないことを調べる
+	// true -- そのIDはない
+	// false -- そのIDはある、もしくは、エラー
+	public boolean NoExistId(String id) {
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			String srl = "SELECT ID FROM EMPLOYEES WHERE ID = ?";
+			PreparedStatement pStmt = conn.prepareStatement(srl);
+			pStmt.setString(1, id);
+			ResultSet rs = pStmt.executeQuery();
+			
+			if (rs.next()) {  // データがある
+				return false;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true; // そのIDはない
+	}  // NoExistId() end
+	
+	public boolean create(Employee emp) {
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			String sql = "INSERT INTO EMPLOYEES (ID, NAME, AGE) VALUES (?, ?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, emp.getId());
+			pStmt.setString(2, emp.getName());
+			pStmt.setInt(3, emp.getAge());
+			int result = pStmt.executeUpdate();
+			if (result != 1) {
+				return false;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
-}
+	
+}  // class end
