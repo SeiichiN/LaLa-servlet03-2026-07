@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.Account;
 
 import java.io.IOException;
@@ -23,9 +24,15 @@ public class CreateAccountServlet extends HttpServlet {
 		String pass = request.getParameter("pass");
 		String mail = request.getParameter("mail");
 		String name = request.getParameter("name");
-		int age = Integer.parseInt(request.getParameter("age"));
+		int age = 0;
+		try {
+			age = Integer.parseInt(request.getParameter("age"));
+		} catch (NumberFormatException e) {
+			age = 0;
+		}
 		Account account = new Account(userId, pass, mail, name, age);
-		request.setAttribute("account", account);
+		HttpSession session = request.getSession();
+		session.setAttribute("account", account);
 		String url = "WEB-INF/jsp/createConfirm.jsp";
 		request.getRequestDispatcher(url).forward(request, response);
 	}

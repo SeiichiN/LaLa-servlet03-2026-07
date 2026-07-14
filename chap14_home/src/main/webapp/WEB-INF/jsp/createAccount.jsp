@@ -12,23 +12,23 @@
 	<form action="CreateAccountServlet" method="post">
 		<p>
 			ユーザーID:<input type="text" name="userId"
-				value="<c:out value="${userId}" />">
+				value="<c:out value="${account.userId}" />">
 		</p>
 		<p>
 			パスワード:<input type="password" name="pass"
-				value="<c:out value="${pass}" />">
+				value="<c:out value="${account.pass}" />">
 		</p>
 		<p>
 			メールアドレス:<input type="email" name="mail"
-				value="<c:out value="${mail}" />">
+				value="<c:out value="${account.mail}" />">
 		</p>
 		<p>
 			名前:<input type="text" name="name"
-				value="<c:out value="${name}" />">
+				value="<c:out value="${account.name}" />">
 		</p>
 		<p>
 			年齢:<input type="text" name="age"
-				value="<c:out value="${age}" />">
+				value="<c:out value="${account.age}" />">
 		</p>
 		<p>
 			<input type="submit" value="確認">
