@@ -18,6 +18,11 @@ public class AccountsDAO {
 			SELECT USER_ID, PASS, MAIL, NAME, AGE FROM ACCOUNTS
 			WHERE USER_ID = ? AND PASS = ?
 			""";
+	private final String SQL_CREATE = 
+			"""
+			INSERT INTO ACCOUNTS(USER_ID, PASS, MAIL, NAME, AGE)
+			VALUES (?, ?, ?, ?, ?)
+			""";
 	
 	public Account findByLogin(Login login) {
 		Account account = null;
@@ -44,8 +49,31 @@ public class AccountsDAO {
 			e.printStackTrace();
 			return null;
 		}
-		
 		return account;
+	}
+	
+	public boolean create(Account account) {
+		try {
+			Class.forName("org.h2.Driver");
+		} catch (ClassNotFoundException e) {
+			throw new IllegalStateException("JDBCドライバをロードできません");
+		}
 		
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			PreparedStatement ps = conn.prepareStatement(SQL_CREATE);
+			ps.setString(1, account.getUserId());
+			ps.setString(2, account.getPass());
+			ps.setString(3, account.getMail());
+			ps.setString(4, account.getName());
+			ps.setInt(5, account.getAge());
+			int result = ps.executeUpdate();
+			if (result != 1) {
+				return false;
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 }
