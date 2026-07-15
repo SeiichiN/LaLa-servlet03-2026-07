@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
 import model.Login;
 import model.LoginLogic;
 
@@ -35,7 +36,9 @@ public class LoginServlet extends HttpServlet {
 			String url = "WEB-INF/jsp/loginOK.jsp";
 			request.getRequestDispatcher(url).forward(request, response);
 		} else {
-			response.sendRedirect("LoginServlet");
+			request.setAttribute("msg", "IDもしくはパスワードが違います");
+			String url = "WEB-INF/jsp/loginNG.jsp";
+			request.getRequestDispatcher(url).forward(request, response);
 		}
 		
 		

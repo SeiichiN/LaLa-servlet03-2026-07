@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,11 @@
 <title>スッキリ商店</title>
 </head>
 <body>
-	<p>ようこそ <c:out value="${sessionScope.userId}"/> さん</p>
-	<a href="LogoutServlet">ログアウト</a>
+	<h2>ログイン失敗</h2>
+	<c:if test="${not empty msg}">
+		<p><c:out value="${msg}" /></p>
+	</c:if>
+	<a href="WelcomeServlet">トップへ</a>
+
 </body>
 </html>
