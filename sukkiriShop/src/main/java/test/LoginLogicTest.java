@@ -14,9 +14,21 @@ public class LoginLogicTest {
 		Login login = new Login("minato", "1234");
 		LoginLogic bo = new LoginLogic();
 		boolean result = bo.execute(login);
+		if (result) {
+			System.out.println("testExecuteOK:成功");
+		} else {
+			System.out.println("testExecuteOK:失敗");
+		}
 	}
 	
 	public static void testExecuteNG() {
-		
+		Login login = new Login("minato", "12345");
+		LoginLogic bo = new LoginLogic();
+		boolean result = bo.execute(login);
+		if (!result) {
+			System.out.println("testExecuteNG:成功");
+		} else {
+			System.out.println("testExecuteNG:失敗");
+		}
 	}
 }
