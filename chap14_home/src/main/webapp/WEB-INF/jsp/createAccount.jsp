@@ -9,6 +9,11 @@
 </head>
 <body>
 	<h1>新規アカウント登録</h1>
+	<c:if test="${not empty errors}">
+		<c:forEach var="error" items="${errors}">
+			<p style="color: red"><c:out value="${error}" /></p>
+		</c:forEach>
+	</c:if>
 	<form action="CreateAccountServlet" method="post">
 		<p>
 			ユーザーID:<input type="text" name="userId"
