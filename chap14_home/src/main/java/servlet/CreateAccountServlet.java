@@ -35,6 +35,7 @@ public class CreateAccountServlet extends HttpServlet {
 			url = "WEB-INF/jsp/createConfirm.jsp";
 		} else {
 			request.setAttribute("errors", errors);
+			request.setAttribute("account", account);
 			url = "WEB-INF/jsp/createAccount.jsp";
 		}
 		request.getRequestDispatcher(url).forward(request, response);
