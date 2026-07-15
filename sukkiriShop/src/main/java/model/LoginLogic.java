@@ -6,6 +6,9 @@ public class LoginLogic {
 	public boolean execute(Login login) {
 		AccountsDAO dao = new AccountsDAO();
 		Account account = dao.findByLogin(login);
-		return account != null;
+		if (account != null) { // userId,passは正しい
+			return true;
+		}
+		return false;
 	}
 }
