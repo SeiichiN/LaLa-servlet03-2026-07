@@ -28,13 +28,12 @@ public class CreateAccountServlet extends HttpServlet {
 		List<String> errors = new ArrayList<>();
 		Validate validate = new Validate();
 		validate.check(account, errors);
+		HttpSession session = request.getSession();
+		session.setAttribute("account", account);
 		String url = null;
 		if (errors.size() == 0) {
-			HttpSession session = request.getSession();
-			session.setAttribute("account", account);
 			url = "WEB-INF/jsp/createConfirm.jsp";
 		} else {
-			request.setAttribute("errors", errors);
 			request.setAttribute("account", account);
 			url = "WEB-INF/jsp/createAccount.jsp";
 		}

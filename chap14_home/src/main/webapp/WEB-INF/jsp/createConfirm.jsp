@@ -16,7 +16,9 @@
 	<p>年齢:<c:out value="${account.age}" /></p>
 	<form action="CreateDoneServlet" method="post">
 		<input type="submit" value="登録">
-		<input type="submit" formaction="CreateAccountServlet" value="戻る" formmethod="get">
+		<input type="submit" 
+		    formaction="CreateAccountServlet" 
+		    value="訂正" formmethod="get">
 	</form>
 </body>
 </html>

@@ -37,9 +37,9 @@
 		</p>
 		<p>
 			<input type="submit" value="確認">
-			<input type="submit" value="もどる"
-				formaction="WelcomeServlet" 
-				formmethod="get">
+			<input type="submit" value="トップへ"
+				formaction="ReturnTopServlet" 
+				formmethod="post">
 		</p>
 	</form>
 </body>
