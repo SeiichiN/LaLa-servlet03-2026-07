@@ -13,25 +13,29 @@ public class AccountsDAO {
 	private final String JDBC_URL = "jdbc:h2:tcp://localhost/~/sukkiriShop";
 	private final String DB_USER = "sa";
 	private final String DB_PASS = "";
-	private final String SQL_FIND_BY_LOGIN = 
-			"""
-			SELECT USER_ID, PASS, MAIL, NAME, AGE FROM ACCOUNTS
-			WHERE USER_ID = ? AND PASS = ?
-			""";
-	private final String SQL_CREATE = 
-			"""
-			INSERT INTO ACCOUNTS(USER_ID, PASS, MAIL, NAME, AGE)
-			VALUES (?, ?, ?, ?, ?)
-			""";
 	
 	public Account findByLogin(Login login) {
 		Account account = null;
 		
+		try {
+			Class.forName("org.h2.Driver");
+		} catch (ClassNotFoundException e) {
+			throw new IllegalStateException(
+					"JDBCドライバーを読み込めませんでした");
+		}
+		
+		String sql =
+				"""
+				SELECT USER_ID, PASS, MAIL, NAME, AGE
+				FROM ACCOUNTS 
+				WHERE USER_ID = ? AND PASS = ?
+				""";
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-			PreparedStatement ps = conn.prepareStatement(SQL_FIND_BY_LOGIN);
-			ps.setString(1, login.getUserId());
-			ps.setString(2, login.getPass());
-			ResultSet rs = ps.executeQuery();
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, login.getUserId());
+			pStmt.setString(2, login.getPass());
+			ResultSet rs = pStmt.executeQuery();
+			
 			if (rs.next()) {
 				String userId = rs.getString("USER_ID");
 				String pass = rs.getString("PASS");
@@ -39,26 +43,40 @@ public class AccountsDAO {
 				String name = rs.getString("NAME");
 				int age = rs.getInt("AGE");
 				account = new Account(userId, pass, mail, name, age);
-			}	
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
 		return account;
 	}
-	
+
 	public boolean create(Account account) {
+		try {
+			Class.forName("org.h2.Driver");
+		} catch (ClassNotFoundException e) {
+			throw new IllegalStateException(
+					"JDBCドライバーを読み込めませんでした");
+		}
+		
+		String sql =
+				"""
+				INSERT INTO ACCOUNTS
+				  (USER_ID, PASS, MAIL, NAME, AGE)
+				VALUES (?, ?, ?, ?, ?)
+				""";
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-			PreparedStatement ps = conn.prepareStatement(SQL_CREATE);
-			ps.setString(1, account.getUserId());
-			ps.setString(2, account.getPass());
-			ps.setString(3, account.getMail());
-			ps.setString(4, account.getName());
-			ps.setInt(5, account.getAge());
-			int result = ps.executeUpdate();
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, account.getUserId());
+			pStmt.setString(2, account.getPass());
+			pStmt.setString(3, account.getMail());
+			pStmt.setString(4, account.getName());
+			pStmt.setInt(5, account.getAge());
+			int result = pStmt.executeUpdate();
+			
 			if (result != 1) {
 				return false;
-			}	
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;

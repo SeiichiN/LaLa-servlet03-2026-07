@@ -1,4 +1,4 @@
-package servlet;
+package servlet.create;
 
 import java.io.IOException;
 
@@ -12,27 +12,26 @@ import jakarta.servlet.http.HttpSession;
 import model.Account;
 import model.CreateLogic;
 
-@WebServlet("/CreateDoneServlet")
-public class CreateDoneServlet extends HttpServlet {
+@WebServlet("/CreateConfirmServlet")
+public class CreateConfirmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		Account account = (Account) session.getAttribute("account");
-		
-		CreateLogic createLogic = new CreateLogic();
+		CreateLogic logic = new CreateLogic();
+		boolean result = logic.execute(account);
 		String msg = null;
-		if (createLogic.execute(account)) {
-			msg = "登録完了しました";
+		if (result) {
+			msg = "登録しました";
 		} else {
-			msg = "登録に失敗しました";
+			msg = "登録できませんでした";
 		}
 		session.removeAttribute("account");
 		
 		request.setAttribute("msg", msg);
-		String url = "WEB-INF/jsp/createDone.jsp";
+		String url = "WEB-INF/jsp_create/createDone.jsp";
 		request.getRequestDispatcher(url).forward(request, response);
-		
 	}
 
 }

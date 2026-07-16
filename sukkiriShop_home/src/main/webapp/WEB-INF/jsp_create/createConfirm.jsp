@@ -1,24 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>スッキリ商店</title>
 </head>
 <body>
-	<h2>新規アカウント確認</h2>
+	<h2>ユーザー登録・確認</h2>
 	<p>ユーザーID:<c:out value="${account.userId}" /></p>
-	<p>パスワード:<c:out value="${account.pass}" /></p>
-	<p>メールアドレス:<c:out value="${account.mail}" /></p>
+	<p>パスワード:<c:out value="${account.pass}" /></p>
+	<p>メール:<c:out value="${account.mail}" /></p>
 	<p>名前:<c:out value="${account.name}" /></p>
 	<p>年齢:<c:out value="${account.age}" /></p>
-	<a href="CreateDoneServlet">
+	<a href="CreateAccountServlet">
+		<button type="button">入力にもどる</button>
+	</a>
+	<a href="CreateConfirmServlet">
 		<button type="button">登録</button>
 	</a>
-	<a href="CreateAccountServlet">
-		<button type="button">訂正</button>
-	</a>
+
 </body>
 </html>
