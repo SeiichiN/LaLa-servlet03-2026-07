@@ -25,9 +25,8 @@
 		ReturnTopServletでセッションのAccountを削除してから
 		トップに戻る 
 		--%>
-		<a href="ReturnTopServlet">
-			<button type="button">トップへ</button>
-		</a>
+		<button type="button"
+		        onclick="location.href='ReturnTopServlet'">トップへ</button>
 		<input type="submit" value="確認">
 	</form>
 </body>

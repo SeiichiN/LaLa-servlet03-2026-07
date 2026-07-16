@@ -20,7 +20,7 @@
 				value="<c:out value="${account.userId}" />">
 		</p>
 		<p>
-			パスワード:<input type="password" name="pass"
+			パスワード:<input type="password" name="pass"
 				value="<c:out value="${account.pass}" />">
 		</p>
 		<p>
