@@ -13,7 +13,7 @@ public class AccountsDAO {
 	private final String JDBC_URL = "jdbc:h2:tcp://localhost/~/sukkiriShop";
 	private final String DB_USER = "sa";
 	private final String DB_PASS = "";
-	
+
 	public Account findByLogin(Login login) {
 		Account account = null;
 		
@@ -50,4 +50,39 @@ public class AccountsDAO {
 		}
 		return account;
 	}
+	
+
+	public boolean create(Account account) {
+		try {
+			Class.forName("org.h2.Driver");
+		} catch (ClassNotFoundException e) {
+			throw new IllegalStateException(
+					"JDBCドライバーを読み込めませんでした");
+		}
+		
+		String sql =
+				"""
+				INSERT INTO ACCOUNTS
+				  (USER_ID, PASS, MAIL, NAME, AGE)
+				VALUES (?, ?, ?, ?, ?)
+				""";
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, account.getUserId());
+			pStmt.setString(2, account.getPass());
+			pStmt.setString(3, account.getMail());
+			pStmt.setString(4, account.getName());
+			pStmt.setInt(5, account.getAge());
+			int result = pStmt.executeUpdate();
+			
+			if (result != 1) {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }
+

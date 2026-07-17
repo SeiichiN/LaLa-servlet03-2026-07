@@ -14,12 +14,10 @@
 	<p>メール:<c:out value="${account.mail}" /></p>
 	<p>名前:<c:out value="${account.name}" /></p>
 	<p>年齢:<c:out value="${account.age}" /></p>
-	<a href="CreateAccountServlet">
-		<button type="button">入力にもどる</button>
-	</a>
-	<a href="CreateConfirmServlet">
-		<button type="button">登録</button>
-	</a>
+	<button type="button" 
+	        onclick="location.href='CreateAccountServlet'">入力にもどる</button>
+	<button type="button" 
+	        onclick="location.href='CreateDoneServlet'">登録</button>
 
 </body>
 </html>
