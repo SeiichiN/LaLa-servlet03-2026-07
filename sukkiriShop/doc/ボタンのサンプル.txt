@@ -1,0 +1,5 @@
+	ボタンのサンプル
+	
+	<button type="button" 
+	        onclick="location.href='CreateAccountServlet'">入力にもどる</button>
+	
