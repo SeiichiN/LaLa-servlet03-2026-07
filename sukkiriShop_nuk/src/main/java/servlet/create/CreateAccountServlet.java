@@ -24,7 +24,6 @@ public class CreateAccountServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		// パラメータ読み込み => Accountインスタンス作成
 		Account account = getAccount(request);
 

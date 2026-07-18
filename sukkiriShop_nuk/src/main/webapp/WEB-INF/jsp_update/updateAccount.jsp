@@ -14,23 +14,23 @@
 	<form action="UpdateItemServlet" method="post">
 		<table border="0">
 			<tr>
-				<th><input type="radio" name="item" value="userId">ユーザーID</th>
+				<th>ユーザーID</th>
 				<td><c:out value="${account.userId}" /></td>
 			</tr>
 			<tr>
-				<th><input type="radio" name="item" value="pass">パスワード</th>
+				<th><labeL><input type="radio" name="item" value="pass">パスワード</labeL></th>
 				<td>******</td>
 			</tr>
 			<tr>
-				<th><input type="radio" name="item" value="mail">メール</th>
+				<th><labeL><input type="radio" name="item" value="mail">メール</labeL></th>
 				<td><c:out value="${account.mail}" /></td>
 			</tr>
 			<tr>
-				<th><input type="radio" name="item" value="name">名前</th>
+				<th><labeL><input type="radio" name="item" value="name">名前</labeL></th>
 				<td><c:out value="${account.name}" /></td>
 			</tr>
 			<tr>
-				<th><input type="radio" name="item" value="age">年齢</th>
+				<th><labeL><input type="radio" name="item" value="age">年齢</labeL></th>
 				<td><c:out value="${account.age}" /></td>
 			</tr>
 		</table>
